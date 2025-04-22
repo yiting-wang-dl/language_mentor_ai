@@ -1,7 +1,7 @@
 import gradio as gr
 from agents.conversation_agent import ConversationAgent
 from agents.job_interview_agent import JobInterviewAgent
-from agents.hotel_checkin_agent import HotelCheckInAgent
+from agents.small_talk_agent import SmallTalkAgent
 from agents.salary_negotiation_agent import SalaryNegotiationAgent
 from agents.renting_agent import RentingAgent
 from utils.logger import LOG
@@ -9,9 +9,9 @@ from utils.logger import LOG
 # Implement the selection and invocation of the conversation agent and scenario agent
 conversation_agent = ConversationAgent()
 job_interview_agent = JobInterviewAgent()
-# small_talk_agent = SmallTalkAgent()
-# salary_negotiation_agent = SalaryNegotiationAgent()
-# renting_agent = RentingAgent()
+small_talk_agent = SmallTalkAgent()
+salary_negotiation_agent = SalaryNegotiationAgent()
+renting_agent = RentingAgent()
 
 
 # Conversation Agent
@@ -28,9 +28,9 @@ def handle_conversation(user_input, chat_history):
 def handle_scenario(user_input, history, scenario):
     agents = {
         "Job Interview": job_interview_agent,
-        # "Small Talk": small_talk_agent,
-        # "Salary Negotiation": salary_negotiation_agent,
-        # "Renting": renting_agent
+        "Small Talk": small_talk_agent,
+        "Salary Negotiation": salary_negotiation_agent,
+        "Renting": renting_agent
     }
     return agents[scenario].respond(user_input)
 
