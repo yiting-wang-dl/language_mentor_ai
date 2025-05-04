@@ -42,27 +42,36 @@ def create_vocab_tab():
 
         gr.Markdown(get_page_desc(feature))
 
-        vocab_chatbot = gr.Chatbot(
-            placeholder="<strong>Your English Mentor Eva</strong><br><br>Start learning new words!",
-            height=800,
-        )   
+        # vocab_chatbot = gr.Chatbot(
+        #     placeholder="<strong>Your English Mentor Eva</strong><br><br>Start learning new words!",
+        #     height=800,
+        # )   
 
-        restart_btn = gr.ClearButton(value="Next Level")
+        # restart_btn = gr.ClearButton(value="Next Level")
 
-        restart_btn.click(
-            fn=restart_vocab_study_chatbot,
-            inputs=None,
-            outputs=vocab_chatbot,
-        )
+        # restart_btn.click(
+        #     fn=restart_vocab_study_chatbot,
+        #     inputs=None,
+        #     outputs=vocab_chatbot,
+        # )
 
+        # gr.ChatInterface(
+        #     fn=handle_vocab,
+        #     # chatbot=vocab_chatbot,
+        #     retry_btn=None,
+        #     undo_btn=None,
+        #     clear_btn=None,
+        #     submit_btn="Send",  
+        #     title="<strong>你的英语私教 Eva</strong><br><br>Start learning new words!",
+        # )
+        
         gr.ChatInterface(
             fn=handle_vocab,
-            chatbot=vocab_chatbot,
+            submit_btn="Send",
             retry_btn=None,
             undo_btn=None,
-            clear_btn=None,
-            submit_btn="Send",  
+            clear_btn="Next Level",
+            title="<strong>你的英语私教 Eva</strong><br><br>Start learning new words!",
         )
-        
     
 

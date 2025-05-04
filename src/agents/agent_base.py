@@ -1,7 +1,9 @@
 import json
+import os
 from abc import ABC, abstractmethod
 
 from langchain_ollama.chat_models import ChatOllama
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -58,11 +60,21 @@ class AgentBase(ABC):
             MessagesPlaceholder(variable_name="messages"),  # Message placeholder
         ])
 
-        self.chatbot = chat_prompt_template | ChatOllama(
-            model="llama3.1:8b-instruct-q8_0",
-            max_tokens=8192,
-            temperature=0.8,
-        )
+        # Allow choosing backend via environment variable: "openai" or default "ollama"
+        backend = os.getenv("AI_BACKEND", "ollama").lower()
+        if backend == "openai":
+            self.chatbot = chat_prompt_template | ChatOpenAI(
+                model_name=os.getenv("OPENAI_MODEL", "gpt-4o-mini").lower(),
+                temperature=0.8,
+                max_tokens=8192,
+            )
+        else:
+            self.chatbot = chat_prompt_template | ChatOllama(
+                model=os.getenv("OLLAMA_MODEL", "llama3.1:8b-instruct-q8_0").lower(),
+                max_tokens=8192,
+                temperature=0.8,
+            )
+        # End of Selectio
 
         # Initialize ChatOllama model with configuration
         self.chatbot_with_history = RunnableWithMessageHistory(self.chatbot, get_session_history)
