@@ -17,6 +17,5 @@ if __name__ == "__main__":
     main()
     
     
-# TODO: 1. enable model switch & api call vs ollma switch
-# 3. handle session id correctly
-# 2. add user id?
+# TODO: 1. add user id?
+# 2. handle session id correctly

@@ -1,5 +1,6 @@
 import json
 import os
+from dotenv import load_dotenv
 from abc import ABC, abstractmethod
 
 from langchain_ollama.chat_models import ChatOllama
@@ -60,11 +61,13 @@ class AgentBase(ABC):
             MessagesPlaceholder(variable_name="messages"),  # Message placeholder
         ])
 
-        # Allow choosing backend via environment variable: "openai" or default "ollama"
+        # Choosing backend via environment variable: "openai" or default "ollama"
+        load_dotenv()
         backend = os.getenv("AI_BACKEND", "ollama").lower()
         if backend == "openai":
             self.chatbot = chat_prompt_template | ChatOpenAI(
                 model_name=os.getenv("OPENAI_MODEL", "gpt-4o-mini").lower(),
+                api_key=os.getenv("OPENAI_API_KEY"),
                 temperature=0.8,
                 max_tokens=8192,
             )
@@ -74,7 +77,7 @@ class AgentBase(ABC):
                 max_tokens=8192,
                 temperature=0.8,
             )
-        # End of Selectio
+        # End of Selection
 
         # Initialize ChatOllama model with configuration
         self.chatbot_with_history = RunnableWithMessageHistory(self.chatbot, get_session_history)
