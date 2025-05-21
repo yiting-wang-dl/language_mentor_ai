@@ -10,7 +10,6 @@ conversation_agent = ConversationAgent()
 def restart_conversation_chatbot():
     conversation_agent.start_new_session()
 
-    # Define initial message and interact with vocab agent
     _next_round = "Start new conversation!"
     bot_message =conversation_agent.chat_with_history(_next_round)    
 
@@ -41,7 +40,6 @@ def create_conversation_tab():
             title="Your English Mentor Eva",
         )
 
-        # TODO: history is not correctly cleared. 
         clear_btn = gr.ClearButton(value="Clear History")
         clear_btn.click(
             fn=restart_conversation_chatbot, 
