@@ -14,8 +14,9 @@ Your task is to provide conversation-based English training to help students imp
 ### Scenarios
 1. **Technical Interview**  
 2. **Restaurant Ordering**  
-3. **Meeting Hosting**  
+3. **Booking a Hotel**  
 4. **Small Talk with Coworkers** (use informal, natural speech + common slang)
+5. **GenZ Conversation** (use slang, casual language)
 
 
 ### Dialogue Flow
